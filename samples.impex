@@ -1,0 +1,17 @@
+#% impex.enableCodeExecution(true)                                                                                                                                                                                           ;                                                                                                                                                                                                                
+#% if: Config.getBoolean("product.promotion.free.gift.enabled", true)
+
+INSERT_UPDATE EfoodProductGift ; code[unique=true] ; manufacturerName ; name[lang=en] ;name[lang=pl] ; $approved; $catalogversion[unique = true]; kindOfSale(code); packageType(code);&productRef
+; 123456789 ; GIFT ; GIFT  ; Gift ;  ;  ; MARC ; O1; 123456789
+; 101112131 ; GIFT ; GIFT ; Gift2 ;  ;  ; MARC ; O1; 101112131
+ 
+
+INSERT_UPDATE PromotionPriceRow;&priceId;Currency(isocode);price[unique=true]
+;10;EUR;10
+;100;EUR;100
+
+INSERT_UPDATE EfoodAutomaticFreeGiftPromotion ; code[unique=true] ; title ; PromotionGroup(identifier) ; description; enabled ; priority ; giftProduct(&productRef) ; thresholdTotals(&priceId) ; displayable ; cumulable ; startDate[dateformat=yyyy.MM.dd] ; endDate[dateformat=yyyy.MM.dd] ; quantityOfPromoToCreate ; quantityOfPromoUsed ; messageFired[lang=en] ; messageCouldHaveFired[lang=en]
+; FreeGift70 ; FREEGIFT ; $defaultPromoGrp ; "Free gift for cart higher than 70€" ; true ; 500 ; 123456789 ; 10 ; true ; true ; 2017.01.01 ; 2099.01.01 ; 1000 ; 1000 ; "You got a free ProductName for spending over {1}" ; "Spend {1} to get a free ProductName - Spend another {3} to qualify"
+; FreeGift700 ; FREEGIFT2 ; $defaultPromoGrp ; "Free gift for cart higher than 700€" ; true ; 500 ; 101112131 ; 100 ; true ; true ; 2017.01.01 ; 2099.01.01 ; 1000 ; 1000 ; "You got a free ProductName for spending over {1}" ; "Spend {1} to get a free ProductName - Spend another {3} to qualify"
+
+#% endif:
