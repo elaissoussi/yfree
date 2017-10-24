@@ -9,6 +9,8 @@ result.each
   
 	def newExternalId = customerExternalIdGenerator.generate()
 	
+	it.setDefaultNeedRanking(EfoodNeedRankEnum.BY_NEED_PRICE)
+	
         println " - externalId : " + newExternalId 
   
 	it.setExternalId(newExternalId)
