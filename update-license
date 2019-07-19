@@ -1,0 +1,5 @@
+cmd => mysql -u root -p
+Enter password:
+cmd => ue hybrisDatabase
+cmd => mysql> UPDATE USERS SET CREATEDTS = DATE_FORMAT('2099/06/15', '%Y/%m/%d');
+cmd => mysql> quit; 
