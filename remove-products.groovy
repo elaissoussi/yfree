@@ -4,7 +4,7 @@ def fsq = new FlexibleSearchQuery(query)
 fsq.setCount(200)
 
 // iteration number to determine using select count(pk)
-for (int i = 0 ; i < 1 ; i++ )
+for (int i = 0 ; i <= iterationNumer ; i++ )
 {
 
 println "start iteration " + i
