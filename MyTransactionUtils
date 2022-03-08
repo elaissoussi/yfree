@@ -1,0 +1,18 @@
+public class MyTransactionUtils {
+    private final PlatformTransactionManager transactionManager;
+
+    public TransactionUtils(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
+    }
+
+    public <T> T doInReadOnlyTransaction(Supplier<T> toExecute) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+        transactionTemplate.setReadOnly(true);
+        return transactionTemplate.execute(status -> toExecute.get());
+    }
+
+    public <T> T doInTransaction(Supplier<T> toExecute) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+        return transactionTemplate.execute(status -> toExecute.get());
+    }
+}
