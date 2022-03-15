@@ -6,10 +6,11 @@ import java.util.Properties;
 
 class Scratch {
 
-     private static final String
-             I18N_DIRECTORY = "/Users/monsif.elaissoussi/workspace/app-seller-payment/seller-payment-app/src/main/resources/META-INF/i18n/";
+    private static final String REGEX = "[^${}]+";
 
-     private static final String
+    private static final String I18N_DIRECTORY ="/Users/monsif.elaissoussi/workspace/app-seller-payment/seller-payment-app/src/main/resources/META-INF/i18n/";
+
+    private static final String
              TO_CHECK = I18N_DIRECTORY + "messages_ar.properties",
              REFERENCE = I18N_DIRECTORY + "messages.properties";
 
@@ -20,12 +21,9 @@ class Scratch {
         TranslationChecker translationChecker = new TranslationChecker(reference, toCheck);
 
         translationChecker.check();
-
     }
 
     static class TranslationChecker {
-
-        private static final String REGEX = "[^{}]+";
 
         private Properties referenceProperties;
         private Properties checkProperties;
@@ -44,16 +42,16 @@ class Scratch {
 
                             if(toCheckValue == null) return;
 
-                            // replace all property value except {} brackets
+                            // replace all property value except $ and {}
                             var referenceValuePattern = String.valueOf(v).replaceAll(REGEX, "").trim();
                             var toCheckValuePattern = toCheckValue.replaceAll(REGEX, "").trim();
 
                             if(!toCheckValuePattern.equals(referenceValuePattern)) {
-                                System.out.println(" something is wrong with this key = " + k);
+                                System.out.println("something is wrong with this key = " + k);
                             }
                     }
             );
-            return true;
+            return false;
         }
 
         private Properties read(final Path file ) {
