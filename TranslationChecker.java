@@ -53,7 +53,7 @@ class Scratch {
                             }
                     }
             );
-            return false;
+            return true;
         }
 
         private Properties read(final Path file ) {
