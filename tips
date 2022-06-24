@@ -1,0 +1,9 @@
+FK - index : for performance :)
+
+When we create a foreign key, this is usually a good idea to index the column that contains the foreign key.
+
+When you delete a row in a table that is targeted by a foreign key, PostgreSQL has to check that the row you are deleting is not referenced by the table owning the foreign key. If there is no index on the column owning the foreign key, PostgreSQL will have to Seq Scan all the table to make sure there is no more reference to the deleted row.
+
+If rows in the targeted column can never be deleted or if the owning table is really small, it might not be an issue, but otherwise, it is!
+
+We should have a test that ensure all foreign key are indexed (with a mechanism for the developer to say that it is not indexed on purpose if there is a use case)
